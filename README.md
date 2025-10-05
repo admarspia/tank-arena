@@ -4,6 +4,13 @@
 It supports **single-player** mode with AI opponents and **multiplayer** mode using real-time WebSocket communication.
 
 ---
+##  Members
+  Abrham Aragie
+  Ahadu Akalu
+  Abrham Teramed
+  Abenezer Dagne
+  Daneal Gashaw
+  
 
 ## 🎯 Goal
 To build a modular game engine that handles rendering, physics, and player control while experimenting with:
