@@ -8,6 +8,7 @@ It supports **single-player** mode with AI opponents and **multiplayer** mode us
 - Abrham Aragie's brain
 - Abrham Aragie's right hand
 - Abrham Aragie's left hand
+- others 
   
 
 ## 🎯 Goal
