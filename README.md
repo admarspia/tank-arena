@@ -5,11 +5,11 @@ It supports **single-player** mode with AI opponents and **multiplayer** mode us
 
 ---
 ##  Members
-  Abrham Aragie.
-  Ahadu Akalu.
-  Abrham Teramed.
-  Abenezer Dagne.
-  Daneal Gashaw.
+- Abrham Aragie
+- Ahadu Akalu
+- Abrham Teramed
+- Abenezer Dagne
+- Daneal Gashaw
   
 
 ## 🎯 Goal
