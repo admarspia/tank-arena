@@ -1,4 +1,4 @@
-# Tank Arena
+# Tank Arena: Maze Escape
 
 **Tank Arena** is a 2D browser-based tank battle game built with **HTML, CSS, and JavaScript**, designed to explore both **web technologies** and **game development**.  
 It supports **single-player** mode with AI opponents and **multiplayer** mode using real-time WebSocket communication.
