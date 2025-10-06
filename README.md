@@ -26,7 +26,7 @@ Build a **modular game engine** that handles rendering, physics, player control,
 ---
 
 ##  Current Status
-Currently setting up the **core game engine**
+- Currently setting up the **core game engine**
 ---
 
 ## Gameplay Overview
