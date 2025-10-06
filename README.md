@@ -26,22 +26,7 @@ Build a **modular game engine** that handles rendering, physics, player control,
 ---
 
 ##  Current Status
-Currently setting up the **core game engine**, including:  
-
-- Player movement and shooting  
-- Collision system  
-- Basic game loop using `requestAnimationFrame`  
-- Maze framework that supports:  
-  - Loading maze layouts from JSON  
-  - Rendering walls and paths on the canvas  
-  - Maze-based collision detection for tanks and bullets  
-
-**Next Steps:**  
-
-1. Implement AI tanks navigating the maze using **C++ → WebAssembly** logic  
-2. Add **multiplayer support** with synchronized game states  
-3. Introduce **power-ups**, dynamic obstacles, and progressively complex maze levels  
-
+Currently setting up the **core game engine**
 ---
 
 ## Gameplay Overview
