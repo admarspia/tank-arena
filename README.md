@@ -11,7 +11,7 @@ The game supports **single-player mode** with AI opponents and **multiplayer mod
 - Ahadu Akalu 0103/16  
 - Abenezer Dagne 056/16  
 - Aschalew Getahun 0193/16  
-- Dabmawi Feyisa 0367/16  
+- Dagmawi Feyissa 0367/16  
 
 ---
 
