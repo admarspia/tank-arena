@@ -1,0 +1,22 @@
+{
+  "name": "2d-tank-arena",
+  "version": "1.0.0",
+  "description": "Playable local version with movement and basic rendering.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "vite": "^7.1.9"
+  },
+  "dependencies": {
+    "gsap": "^3.13.0",
+    "three": "^0.180.0",
+    "tree": "^0.1.3"
+  }
+}
