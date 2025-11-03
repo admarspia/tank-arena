@@ -1,53 +1,47 @@
 import Renderer from "../../engine/Renderer.js";
 import Turret from "./Turret.js";
+import * as THREE from "three";
+
+const { Vector3, Quaternion } = THREE;
 
 export default class TankBody {
-  constructor(x, y = 0, z, color = 0x00ff00, speed = 1, width = 2, height = 1, depth = 3) {
-    this.px = x;
-    this.py = y;
-    this.pz = z;
+  constructor(x, y = 0, z, color = 0x00ff00, speed = 5, width = 2, height = 1, depth = 3) {
     this.color = color;
     this.width = width;
     this.height = height;
     this.depth = depth;
-    this.angle = 0;
     this.speed = speed;
 
     this.renderer = new Renderer();
-    this.mesh = this.renderer.createBlock(x, y, z, color, width, height, depth);
+    this.mesh = this.renderer.createBlock(x, height/ 2, z, color, width, height, depth);
     this.turret = new Turret(this);
 
     this.renderer.scene.add(this.mesh);
+    this.forward = new Vector3(0, 0, -1);
+    this._rot = new Quaternion();
+    this._move = new Vector3();
   }
 
   moveForward(delta) {
-    this.px += Math.sin(this.angle) * this.speed * delta;
-    this.pz += Math.cos(this.angle) * this.speed * delta;
-    this.updatePosition();
+    this.forward.set(0, 0, -1).applyQuaternion(this.mesh.quaternion);
+    this._move.copy(this.forward).normalize().multiplyScalar(this.speed * delta);
+    this.mesh.position.sub(this._move);
   }
 
   moveBackward(delta) {
-    this.px -= Math.sin(this.angle) * this.speed * delta;
-    this.pz -= Math.cos(this.angle) * this.speed * delta;
-    this.updatePosition();
+    this.forward.set(0, 0, -1).applyQuaternion(this.mesh.quaternion);
+    this._move.copy(this.forward).normalize().multiplyScalar(this.speed * delta);
+    this.mesh.position.add(this._move);
   }
 
   rotateLeft(delta) {
-    this.angle += Math.PI / 6 * delta;
-    this.updateRotation();
+    this._rot.setFromAxisAngle(new Vector3(0, 1, 0), delta * 0.8);
+    this.mesh.quaternion.multiply(this._rot);
   }
 
   rotateRight(delta) {
-    this.angle -= Math.PI / 6 * delta;
-    this.updateRotation();
-  }
-
-  updatePosition() {
-    this.mesh.position.set(this.px, this.py, this.pz);
-  }
-
-  updateRotation() {
-    this.mesh.rotation.y = this.angle;
+    this._rot.setFromAxisAngle(new Vector3(0, 1, 0), -delta * 0.8);
+    this.mesh.quaternion.multiply(this._rot);
   }
 }
 

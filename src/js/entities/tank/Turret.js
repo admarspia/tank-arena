@@ -18,12 +18,12 @@ export default class Turret {
   }
 
   rotateLeft(delta) {
-    this.rotationAngle += delta;
+    this.rotationAngle += delta * 0.8;
     this.updateRotation();
   }
 
   rotateRight(delta) {
-    this.rotationAngle -= delta;
+    this.rotationAngle -= delta * 0.8;
     this.updateRotation();
   }
 

@@ -26,14 +26,17 @@ export default class Barrel {
   }
 
   aimUp(delta) {
-    this.angle -= delta;
-    this.mesh.rotation.x = 0  + this.angle;
-  }
+      this.angle -= delta * 0.8;
+      this.angle = THREE.MathUtils.clamp(this.angle, THREE.MathUtils.degToRad(-90), THREE.MathUtils.degToRad(10));
+      this.mesh.rotation.x = this.angle;
+    }
 
-  aimDown(delta) {
-    this.angle += delta;
-    this.mesh.rotation.x = this.angle;
-  }
+    aimDown(delta) {
+      this.angle += delta * 0.8;
+      this.angle = THREE.MathUtils.clamp(this.angle, THREE.MathUtils.degToRad(-90), THREE.MathUtils.degToRad(10));
+      this.mesh.rotation.x = this.angle;
+    }
+
 
 shoot(bulletsArray, scene) {
   this.muzzle.updateMatrixWorld(true);
