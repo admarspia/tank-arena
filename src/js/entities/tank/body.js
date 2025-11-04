@@ -11,6 +11,8 @@ export default class TankBody {
     this.height = height;
     this.depth = depth;
     this.speed = speed;
+    this.shoted = 0;
+    this.hitted = 0;
 
     this.renderer = new Renderer();
     this.mesh = this.renderer.createBlock(x, height/ 2, z, color, width, height, depth);
@@ -20,18 +22,21 @@ export default class TankBody {
     this.forward = new Vector3(0, 0, -1);
     this._rot = new Quaternion();
     this._move = new Vector3();
+    this.lastMove = new Vector3();
   }
 
   moveForward(delta) {
     this.forward.set(0, 0, -1).applyQuaternion(this.mesh.quaternion);
     this._move.copy(this.forward).normalize().multiplyScalar(this.speed * delta);
-    this.mesh.position.sub(this._move);
+    this.mesh.position.add(this._move); 
+    this.lastMove = this._move.clone(); 
   }
 
   moveBackward(delta) {
     this.forward.set(0, 0, -1).applyQuaternion(this.mesh.quaternion);
     this._move.copy(this.forward).normalize().multiplyScalar(this.speed * delta);
-    this.mesh.position.add(this._move);
+    this.mesh.position.sub(this._move); 
+    this.lastMove = this._move.clone().negate(); 
   }
 
   rotateLeft(delta) {

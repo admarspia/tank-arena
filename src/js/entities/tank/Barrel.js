@@ -37,19 +37,24 @@ export default class Barrel {
       this.mesh.rotation.x = this.angle;
     }
 
+    shoot(bulletsArray, scene) {
+      this.muzzle.updateMatrixWorld(true);
 
-shoot(bulletsArray, scene) {
-  this.muzzle.updateMatrixWorld(true);
+      const worldPos = new THREE.Vector3();
+      const worldDir = new THREE.Vector3();
 
-  const worldPos = new THREE.Vector3();
-  const worldDir = new THREE.Vector3()
+      this.muzzle.getWorldPosition(worldPos);
+      this.muzzle.getWorldDirection(worldDir);
 
-  this.muzzle.getWorldPosition(worldPos);
-  this.muzzle.getWorldDirection(worldDir);
+      const offsetDistance = this.length;
+      const startPos = worldPos.clone().add(worldDir.clone().multiplyScalar(offsetDistance));
 
-  const bullet = new Bullet(worldPos.clone(), worldDir.normalize(), scene);
-  bulletsArray.push(bullet);
-}
+      const bullet = new Bullet(startPos, worldDir, scene);
+
+
+      bulletsArray.push(bullet);
+    }
+
 
 }
 

@@ -27,7 +27,7 @@ export default class Renderer {
     dirLight.castShadow = true;
     this.scene.add(dirLight);
 
-    const groundGeo = new THREE.PlaneGeometry(100, 100); 
+    const groundGeo = new THREE.PlaneGeometry(100, 100);
     const groundMat = new THREE.MeshStandardMaterial({ color: 0x888888 });
     const ground = new THREE.Mesh(groundGeo, groundMat);
     ground.rotation.x = -Math.PI / 2;
@@ -35,7 +35,7 @@ export default class Renderer {
     this.scene.add(ground);
 
     this.mazeGrid = new Maze(30, 30);
-
+    this.walls = []; 
     window.addEventListener("resize", () => this.onWindowResize());
   }
 
@@ -73,6 +73,7 @@ export default class Renderer {
             blockSize
           );
           this.scene.add(block);
+          this.walls.push(block); // push into flat array
         }
       }
     }
