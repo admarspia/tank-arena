@@ -14,7 +14,7 @@ export default class Turret {
     this.mesh = this.renderer.createBlock(0, this.body.height / 2, 0, color, width, height, depth);
     this.body.mesh.add(this.mesh);
 
-    this.barrel = new Barrel(this, 2, 0.1, 0.2, 0x558852);
+    this.barrel = new Barrel(this.body,this, 2, 0.1, 0.2, 0x558852);
   }
 
   rotateLeft(delta) {

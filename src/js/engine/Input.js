@@ -12,8 +12,18 @@ export default class Input {
     return this.keys.has(key);
   }
 
-  isMouseDown(button = 0) {
-    return this.mouse.buttons.has(button);
-  }
+  handleUserInputs(delta, tank){
+    if (this.isDown("ArrowDown")) tank.moveForward(delta);
+    if (this.isDown("ArrowUp")) tank.moveBackward(delta);
+    if (this.isDown("ArrowLeft")) tank.rotateLeft(delta);
+    if (this.isDown("ArrowRight")) tank.rotateRight(delta);
+    if (this.isDown("i")) tank.aimUp(delta);
+    if (this.isDown("k")) tank.aimDown(delta);
+    if (this.isDown("j")) tank.rotateLeft(delta);
+    if (this.isDown("l")) tank.rotateRight(delta);
+    if (this.isDown("x")) tank.fire(renderer.scene);
+
+      
+  } 
 }
 

@@ -11,7 +11,7 @@ export default class TankBody {
     this.height = height;
     this.depth = depth;
     this.speed = speed;
-    this.shoted = 0;
+    this.score = 0;
     this.hitted = 0;
 
     this.renderer = new Renderer();

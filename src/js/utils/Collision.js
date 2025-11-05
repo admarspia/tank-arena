@@ -33,6 +33,7 @@ export default class Collision {
           this.box2.setFromObject(bullet.mesh);
 
         if (this.box1.intersectsBox(this.box2)) {
+          bullet.owner.score++;
           bullet.destroy();
           collisions.push({ tank, bullet });
         }

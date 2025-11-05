@@ -3,13 +3,14 @@ import Bullet from "./Bullet.js";
 import * as THREE from "three";
 
 export default class Barrel {
-  constructor(turret, length, innerRadius, outerRadius, color) {
+  constructor(owner ,turret, length, innerRadius, outerRadius, color) {
     this.turret = turret;
     this.length = length;
     this.innerRadius = innerRadius;
     this.outerRadius = outerRadius;
     this.color = color;
     this.angle = 0;
+    this.owner = owner;
     this.renderer = new Renderer();
 
     this.mesh = this.renderer.createBlock(0, 0,0,color, 0.3, 0.3, 3);
@@ -49,7 +50,7 @@ export default class Barrel {
       const offsetDistance = this.length;
       const startPos = worldPos.clone().add(worldDir.clone().multiplyScalar(offsetDistance));
 
-      const bullet = new Bullet(startPos, worldDir, scene);
+      const bullet = new Bullet(this.owner,startPos, worldDir, scene);
 
 
       bulletsArray.push(bullet);

@@ -1,13 +1,13 @@
 import * as THREE from "three";
 
 export default class Bullet {
-  constructor(position, direction, scene, speed = 20, size = 0.1, color = 0xffff00) {
+  constructor(owner, position, direction, scene, speed = 20, size = 0.1, color = 0xffff00) {
     this.speed = speed;
     this.size = size;
     this.color = color;
     this.active = true;
     this.limit = 100;
-
+    this.owner = owner;
     this.position = position.clone();
     this.direction = direction.clone().normalize();
 

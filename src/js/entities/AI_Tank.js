@@ -1,14 +1,12 @@
 import Tank from "./tank/body.js";
 
-export default class PlayerTank extends Tank {
-    constructor ( playerName, level, scene, x, y = 0, z, color = 0x00fff00, speed = 5, wind = 2, height = 1, depth = 3){
-        super(x, y, z, color, speed, width, height, depth);
-
+export default class AI_Tank extends Tank {
+    super(x, y = 0, z, color = 0x00ff70, speed = 5, width = 2, height = 1, depth = 3);
+    constructor (playerName, level, scene ){
         this.playerName = playerName;
         this.score = 0;
         this.level = level;
         this.life = 100;
-        this.ammo = 1000;
         this.isAlive = true;
         this.interval = 0;
         this.scene = scene;
@@ -42,29 +40,9 @@ export default class PlayerTank extends Tank {
     }
 
     const bullets = [];
-    let lastShotTime = 0;
-    const shootInterval = 0.2;
 
     fire(this.scene, bullets){
         super.turret.barrel.shoot(bullets,scene);
-        let time = Date.now();
-
-        if (time - lastShotTime > shootInterval * 1000) {
-            for (let i = bullets.length - 1; i >= 0; i--) {
-                const bullet = bullets[i];
-                bullet.update(delta);
-                lastShotTime = time;
-                if (!bullet.active) bullets.splice(i, 1);
-            }
-        }
-    }
-
-    getScore() {
-        return super.score;
-    }
-
-    getPosition(){
-        return super.mesh.position;
     }
 
     respawn (){
