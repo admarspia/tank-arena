@@ -1,78 +1,84 @@
-import Tank from "./tank/body.js";
+import TankBody from "./tank/body.js";
 
-export default class PlayerTank extends Tank {
-    constructor ( playerName, level, scene, x, y = 0, z, color = 0x00fff00, speed = 5, wind = 2, height = 1, depth = 3){
-        super(x, y, z, color, speed, width, height, depth);
+export default class PlayerTank extends TankBody {
+  constructor(playerName, level, scene, x, y = 0, z, color = 0x00ff00, speed = 5, width = 2, height = 1, depth = 3) {
+    super(x, y, z, color, speed, width, height, depth);
 
-        this.playerName = playerName;
-        this.score = 0;
-        this.level = level;
-        this.life = 100;
-        this.ammo = 1000;
-        this.isAlive = true;
-        this.interval = 0;
-        this.scene = scene;
+    this.playerName = playerName;
+    this.level = level;
+    this.score = 0;
+    this.life = 100;
+    this.ammo = 1000;
+    this.isAlive = true;
+    this.scene = scene;
+    this.lastShotTime = 0;
+    this.bullets = [];
+  }
+
+  damage(amount) {
+    this.life -= amount;
+    if (this.life <= 0) this.destroy();
+  }
+
+  destroy() {
+    this.isAlive = false;
+    if (this.mesh && this.mesh.parent) {
+      this.mesh.parent.remove(this.mesh);
     }
-    
-    damage(amount){
-        this.life -= amount;
-        if (this.life <= 0) distroy();
-    }
+    console.log("Game over! You got destroyed by the AI tanks!");
+  }
 
-    distroy() {
-        this.life = false;
-        super.mash.parent.remove(super.mesh);
-        console.log("Game over! you bullshit how do you get shited by this ai tanks!");
-    }
+  moveForward(delta) {
+    super.moveForward(delta);
+  }
 
-    moveForward (delta) {
-        super.moveForward(delta);
-    }
+  moveBackward(delta) {
+    super.moveBackward(delta);
+  }
 
-    moveBackward(delta) {
-        super.moveBackward(delta);
-    }
+  rotateLeft(delta) {
+    super.rotateLeft(delta);
+  }
 
-    rotateLeft(delta){
-        super.rotateLeft(delta);
-    }
+  rotateRight(delta) {
+    super.rotateRight(delta);
+  }
 
-    rotateRight(delta){
-        super.rotateRight(delta);
-    }
 
-    const bullets = [];
-    let lastShotTime = 0;
-    const shootInterval = 0.2;
 
-    fire(this.scene, bullets){
-        super.turret.barrel.shoot(bullets,scene);
-        let time = Date.now();
+fire(scene) {
+  const shootInterval = 0.2;
+  const now = Date.now();
 
-        if (time - lastShotTime > shootInterval * 1000) {
-            for (let i = bullets.length - 1; i >= 0; i--) {
-                const bullet = bullets[i];
-                bullet.update(delta);
-                lastShotTime = time;
-                if (!bullet.active) bullets.splice(i, 1);
-            }
-        }
-    }
-
-    getScore() {
-        return super.score;
-    }
-
-    getPosition(){
-        return super.mesh.position;
-    }
-
-    respawn (){
-        this.score = 0;
-        this.life = 100;
-        this.ammo = 1000;
-        this.isAlive = true;
-        this.interval = 0;
-    }
-  
+  if (now - this.lastShotTime > shootInterval * 1000) {
+    this.turret.barrel.shoot(this.bullets, scene);
+    this.lastShotTime = now;
+  }
 }
+
+// New method to update bullets
+updateBullets(delta) {
+  for (let i = this.bullets.length - 1; i >= 0; i--) {
+    const bullet = this.bullets[i];
+    bullet.update(delta);
+    if (!bullet.active) this.bullets.splice(i, 1);
+  }
+}
+
+
+  getScore() {
+    return this.score;
+  }
+
+  getPosition() {
+    return this.mesh.position;
+  }
+
+  respawn() {
+    this.score = 0;
+    this.life = 100;
+    this.ammo = 1000;
+    this.isAlive = true;
+  }
+}
+

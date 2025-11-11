@@ -1,37 +1,37 @@
-import Collistion from "./Collision.js";
+import Collision from "./Collision.js";
 
-const collistion = new Collistion();
+export default class CollisionHandler {
+  constructor(walls, bullets, tanks) {
+    this.walls = walls;
+    this.bullets = bullets;
+    this.tanks = tanks;
+    this.collision = new Collision();
+  }
 
-export default class CollistionHandler {
-    constructor (walls, bullets, tanks){
-        this.tankPair = 
-        this.tankWallCollisions = collision.tanksMazeCollision(tanks, renderer.walls);
-        this.tankBulletCollisions = collision.tanksBulletCollision(tanks, bullets);
-        this.bulletWallCollisions = collision.bulletsMazeCollision(bullets, renderer.walls);
+  update() {
+    const tankWallCollisions = this.collision.tanksMazeCollision(this.tanks, this.walls);
+    const tankTankCollision = this.collision.tankTankCollision(this.tanks);
+    const tankBulletCollisions = this.collision.tanksBulletCollision(this.tanks, this.bullets);
+    const bulletWallCollisions = this.collision.bulletsMazeCollision(this.bullets, this.walls);
+
+    for (const { tank } of tankWallCollisions) {
+      tank.mesh.position.sub(tank.lastMove);
     }
 
-    tanksMazeCollision() {
-        for (const { tank, wall } of tankWallCollisions) {
-            tank.mesh.position.sub(tank.lastMove);
-        }
+    if (tankTankCollision) {
+      tankTankCollision.tankA.mesh.position.sub(tankTankCollision.tankA.lastMove);
+      tankTankCollision.tankB.mesh.position.sub(tankTankCollision.tankB.lastMove);
     }
 
-    tankToTankCollision(){
-        if (tankPair) {
-                tank.mesh.position.sub(tank.lastMove);
-        }
-        else return;
+    for (const { tank } of tankBulletCollisions) {
+      tank.hitted++;
+      console.log("Tank hit by bullet!");
     }
 
-    tanksBulletCollision(){
-        for (const { tank, wall } of tankWallCollisions) {
-            tank.mesh.position.sub(tank.lastMove);
-        }
+    for (const { bullet } of bulletWallCollisions) {
+      bullet.destroy();
+      console.log("Bullet hit a wall!");
     }
-
-    bulletsMazeCollision(){
-        for (const { wall, bullet } of bulletWallCollisions) {
-            console.log("Bullet hit a wall!");
-        }
-    }
+  }
 }
+
