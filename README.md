@@ -1,49 +1,54 @@
-# Tank Arena: Maze Escape 
+# Tank Arena: Maze Challenge
 
-**Tank Arena: Maze Escape** is a 3D browser-based tank battle game built with **HTML, CSS, and JavaScript**, combining **action gameplay** with **puzzle-like maze navigation**.  
-Players must **navigate through maze-like maps**, defeat AI-controlled tanks, and **reach the exit** while avoiding obstacles.  
-The game supports **single-player mode** with AI opponents and **multiplayer mode** using real-time WebSocket communication.
-
----
-
-##  Team Members
-- Abrham Aragie 0089/16  
-- Ahadu Akalu 0113/16
-- Amir Yimam 0169/16
-- Abenezer Dagne 056/16  
-- Aschalew Getahun 0193/16  
-- Dagmawi Feyissa 0367/16  
+![Game Banner]
+**Tank Arena: Maze Challenge** is a **3D browser-based tank game** built with **HTML, CSS, and JavaScript**, using **Three.js** for rendering. Players control a tank to **navigate shrinking fence arenas**, solve **phrase-based puzzles**, and survive while avoiding collisions with walls.
 
 ---
 
-## 🎯 Goal
-Build a **modular game engine** that handles rendering, physics, player control, and maze navigation while experimenting with:  
+## 🚀 Features
 
--  **Real-time multiplayer synchronization**  
--  **AI behavior** using C++ (compiled to WebAssembly) to navigate mazes and engage the player  
--  **Efficient canvas-based rendering** for dynamic mazes and obstacles  
--  **Maze mechanics**: procedurally generated or predefined maps with walls, paths, and exit points  
+- **3D Shrinking Fences:** Arenas shrink toward the center over time.
+- **Hidden Wall Mechanics:** Certain walls are determined by random phrases.
+- **Tank Control:** Move, rotate, and shoot bullets.
+- **Collision Detection:** Tanks and bullets interact with fences and obstacles.
+- **Level Progression:** Multiple levels of fences with increasing size.
+- **Win/Lose Conditions:** 
+  - **Win:** Last fence destroyed.
+  - **Lose:** Tank collides with a wall.
 
 ---
 
-##  Current Status
-- Currently setting up the **core game engine**
----
+## 🎮 Gameplay
 
-## Gameplay Overview
-- Players start in a **maze level** with walls, corridors, and a defined exit  
-- **Objective:** Navigate the maze while defeating AI tanks and reaching the exit  
-- **Single-Player Mode:** AI tanks use pathfinding logic to chase the player  
-- **Multiplayer Mode:** All players share the same maze, with real-time movement and combat  
-- **Power-Ups (Optional):** Health packs, ammo, speed boosts, or radar to reveal hidden paths  
+1. Player spawns in a fenced arena with a tank.
+2. Navigate the arena while avoiding wall collisions.
+3. Destroy fences to progress to the next level.
+4. Hidden wall puzzles change each level using phrase-based logic.
+5. Game ends when:
+   - The last fence is destroyed → **You Win!**
+   - Tank collides with a wall → **You Lose!**
 
 ---
 
 ## 🛠️ Tech Stack
-- **Frontend:** HTML, CSS, JavaScript (Canvas API)  
-- **Backend:** JavaScript using node.js runtime environment (WebSocket server)  
-- **AI / Performance Module:** C++ → WebAssembly  
+
+- **Frontend:** HTML, CSS, JavaScript, Three.js (WebGL)
+- **Game Engine:** Modular JS classes:
+  - `Game.js` – Core game logic
+  - `Renderer.js` – 3D rendering
+  - `Fance.js` – Fence creation and shrinking
+  - `PlayerTank.js` – Tank movement and shooting
+  - `CollisionHandler.js` – Collision detection
+- **Puzzle Logic:** Phrase-based wall generation
 
 ---
+👥 Team Members
+  - Abrham Aragie 0089/16
+  - Ahadu Akalu 0113/16
+  - Amir Yimam 0169/16
+  - Abenezer Dagne 056/16
+  - Aschalew Getahun 0193/16
+  - Dagmawi Feyissa 0367/16
+
 
 
