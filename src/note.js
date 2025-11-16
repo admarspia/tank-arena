@@ -1,6 +1,5 @@
 import * as THREE from "three";
-
-const { Vector2, Vector3, Spherical, MathUtils } = THREE;
+const { Vector2, Vector3, Spherical } = THREE;
 
 export default class ThirdPersonCamera {
   constructor(camera, target, options = {}) {
@@ -8,32 +7,27 @@ export default class ThirdPersonCamera {
     this.target = target;
 
     this.distance = options.distance || 5;
-    this.height = options.height || 3;
-    this.smoothness = options.smoothness || 0.1;
+    this.height = options.height || 5;
     this.sensitivity = options.sensitivity || 0.1;
 
+    // Start behind the player
     this.cameraDirection = new Spherical(
       this.distance,
-      MathUtils.degToRad(85),  // between 80–90
-      Math.PI
+      THREE.MathUtils.degToRad(85), // polar (close to top-down but not exactly)
+      0                             // azimuth (behind the target)
     );
 
     this.orbit = this.cameraDirection.clone();
-
+    this.buttonDown = -1;
     this.mouse = new Vector2();
     this.lastMouse = new Vector2();
 
-    this.buttonDown = -1;
+    this.minPolar = THREE.MathUtils.degToRad(10); // lowest angle
+    this.maxPolar = THREE.MathUtils.degToRad(180); // highest angle
 
-    // Polar limits (fix: min < max)
-    this.minPolar = MathUtils.degToRad(80);
-    this.maxPolar = MathUtils.degToRad(90);
+    // Force initial camera position to focus target
+    this._snapToTarget();
 
-    this._rotateWithTarget();
-    this._addMouseEvents();
-  }
-
-  _addMouseEvents() {
     window.addEventListener("mousedown", (e) => {
       this.buttonDown = e.button;
       this.mouse.set(e.pageX, e.pageY);
@@ -48,7 +42,7 @@ export default class ThirdPersonCamera {
 
         this.cameraDirection.set(
           this.distance,
-          MathUtils.clamp(
+          THREE.MathUtils.clamp(
             this.orbit.phi + dy * 2,
             this.minPolar,
             this.maxPolar
@@ -60,47 +54,36 @@ export default class ThirdPersonCamera {
       }
     });
 
-    window.addEventListener("mouseup", () => {
-      this.buttonDown = -1;
-    });
+    window.addEventListener("mouseup", () => (this.buttonDown = -1));
 
     window.addEventListener("wheel", (e) => {
-      this.distance = MathUtils.clamp(
+      this.distance = THREE.MathUtils.clamp(
         this.distance + Math.sign(e.deltaY),
         2,
         20
       );
-      this.cameraDirection.radius = this.distance;
     });
   }
 
-  _rotateWithTarget() {
-    const s = this.cameraDirection.clone();
-    s.theta += this.target.mesh.rotation.y;
-
-    const camPos = new Vector3().setFromSpherical(s);
+  _snapToTarget() {
+    const camPos = new Vector3().setFromSpherical(this.cameraDirection);
     camPos.add(this.target.mesh.position);
     camPos.y += this.height;
 
     this.camera.position.copy(camPos);
     this.camera.lookAt(
-      this.target.mesh.position.clone().add(new Vector3(0, 1, 0))
+      this.target.mesh.position.clone().add(new Vector3(0, 2, 0))
     );
   }
 
   update(delta) {
-    const s = this.cameraDirection.clone();
-    s.theta += this.target.mesh.rotation.y;
-
-    s.phi = MathUtils.clamp(s.phi, this.minPolar, this.maxPolar);
-
-    const camPos = new Vector3().setFromSpherical(s)
-      .add(this.target.mesh.position);
+    const camPos = new Vector3().setFromSpherical(this.cameraDirection);
+    camPos.add(this.target.mesh.position);
     camPos.y += this.height;
 
-    this.camera.position.lerp(camPos, this.smoothness);
+    this.camera.position.lerp(camPos, 0.1);
     this.camera.lookAt(
-      this.target.mesh.position.clone().add(new Vector3(0, 1, 0))
+      this.target.mesh.position.clone().add(new Vector3(0, 2, 0))
     );
   }
 }

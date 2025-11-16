@@ -1,36 +1,57 @@
-import Collision from "./Collision.js";
+import * as THREE from "three";
 
 export default class CollisionHandler {
-  constructor(walls, bullets, tanks) {
+  constructor(fence, walls, bullets, playerTank, hiddenWallIndex) {
+    this.fence = fence;
     this.walls = walls;
     this.bullets = bullets;
-    this.tanks = tanks;
-    this.collision = new Collision();
+    this.playerTank = playerTank;
+    this.hiddenWallIndex = hiddenWallIndex;
+  }
+
+  setFence(fence) {
+    this.fence = fence;
+    this.walls = fence.walls;
   }
 
   update() {
-    const tankWallCollisions = this.collision.tanksMazeCollision(this.tanks, this.walls);
-    const tankTankCollision = this.collision.tankTankCollision(this.tanks);
-    const tankBulletCollisions = this.collision.tanksBulletCollision(this.tanks, this.bullets);
-    const bulletWallCollisions = this.collision.bulletsMazeCollision(this.bullets, this.walls);
+    const tankBox = new THREE.Box3().setFromObject(this.playerTank.mesh);
 
-    for (const { tank } of tankWallCollisions) {
-      tank.mesh.position.sub(tank.lastMove);
+    for (let i = 0; i < this.walls.length; i++) {
+      const wall = this.walls[i];
+      if (!wall.isActive) continue;
+
+      const wallBox = new THREE.Box3().setFromObject(wall.mesh);
+
+      if (tankBox.intersectsBox(wallBox)) {
+        if (i === this.hiddenWallIndex) {
+          this.fence.openFance(i, 3);
+          this.fence.isActive = false;
+        } else {
+          this.playerTank.mesh.position.sub(this.playerTank.lastMove);
+        }
+      }
     }
 
-    if (tankTankCollision) {
-      tankTankCollision.tankA.mesh.position.sub(tankTankCollision.tankA.lastMove);
-      tankTankCollision.tankB.mesh.position.sub(tankTankCollision.tankB.lastMove);
-    }
+    for (let bullet of this.bullets) {
+      if (!bullet.active) continue;
 
-    for (const { tank } of tankBulletCollisions) {
-      tank.hitted++;
-      console.log("Tank hit by bullet!");
-    }
+      const bulletBox = new THREE.Box3().setFromObject(bullet.mesh);
 
-    for (const { bullet } of bulletWallCollisions) {
-      bullet.destroy();
-      console.log("Bullet hit a wall!");
+      for (let i = 0; i < this.walls.length; i++) {
+        const wall = this.walls[i];
+        if (!wall.isActive) continue;
+
+        const wallBox = new THREE.Box3().setFromObject(wall.mesh);
+
+        if (bulletBox.intersectsBox(wallBox)) {
+          bullet.destroy();
+          if (i === this.hiddenWallIndex) {
+            this.fence.openFance(i, 3);
+            this.fence.isActive = false;
+          }
+        }
+      }
     }
   }
 }

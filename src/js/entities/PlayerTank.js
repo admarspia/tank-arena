@@ -1,7 +1,7 @@
 import TankBody from "./tank/body.js";
 
 export default class PlayerTank extends TankBody {
-  constructor(playerName, level, scene, x, y = 0, z, color = 0x00ff00, speed = 5, width = 2, height = 1, depth = 3) {
+  constructor(playerName, level, scene, x, y = 0, z, color = 0x00ff00, speed = 5, width = 2, height = 1, depth = 2.5) {
     super(x, y, z, color, speed, width, height, depth);
 
     this.playerName = playerName;
