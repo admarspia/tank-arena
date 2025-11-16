@@ -1,103 +1,92 @@
 import * as THREE from "three";
-import Maze from "../maze/maze.js";
 
 export default class Renderer {
-  constructor() {
-    this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0xa0d8ef);
+    constructor() {
+        this.scene = new THREE.Scene();
+        this.scene.background = new THREE.Color(0xa0d8ef);
 
-    this.camera = new THREE.PerspectiveCamera(
-      60,
-      window.innerWidth / window.innerHeight,
-      0.01,
-      1000
-    );
-    this.camera.position.set(20, 20, 20);
+        this.camera = new THREE.PerspectiveCamera(
+            60,
+            window.innerWidth / window.innerHeight,
+            0.01,
+            1000
+        );
+        this.camera.position.set(20, 20, 20);
 
-    this.renderer = new THREE.WebGLRenderer({ antialias: true });
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
-    this.renderer.shadowMap.enabled = true;
-    document.body.appendChild(this.renderer.domElement);
+        this.container = document.getElementById("gameArea");
 
-    const ambient = new THREE.AmbientLight(0xffffff, 0.3);
-    this.scene.add(ambient);
+        this.renderer = new THREE.WebGLRenderer({ antialias: true });
+        this.renderer.setSize(
+            this.container.clientWidth,
+            this.container.clientHeight
+        );
+        this.container.appendChild(this.renderer.domElement);
 
-    const dirLight = new THREE.DirectionalLight(0xffffff, 1);
-    dirLight.position.set(20, 30, 20);
-    dirLight.castShadow = true;
-    this.scene.add(dirLight);
+        this.renderer.shadowMap.enabled = true;
 
-    // Ground
-    const planeSize = 100;
-    const groundGeo = new THREE.PlaneGeometry(planeSize, planeSize);
-    const groundMat = new THREE.MeshStandardMaterial({ color: 0x888888 });
-    const ground = new THREE.Mesh(groundGeo, groundMat);
-    ground.rotation.x = -Math.PI / 2;
-    ground.receiveShadow = true;
-    this.scene.add(ground);
+        const ambient = new THREE.AmbientLight(0xffffff, 0.3);
+        this.scene.add(ambient);
 
-    // Grid helper for debugging
-    const gridHelper = new THREE.GridHelper(planeSize, 15, 0x000000, 0x000000);
-    gridHelper.position.y = 0.01; // slightly above ground to avoid z-fighting
-    this.scene.add(gridHelper);
+        const dirLight = new THREE.DirectionalLight(0xffffff, 1);
+        dirLight.position.set(20, 30, 20);
+        dirLight.castShadow = true;
+        this.scene.add(dirLight);
 
-    this.mazeGrid = new Maze(30, 30);
-    this.walls = [];
+        const groundGeo = new THREE.PlaneGeometry(200, 200);
+        const groundMat = new THREE.MeshStandardMaterial({ color: 0x777777 });
+        const ground = new THREE.Mesh(groundGeo, groundMat);
+        ground.rotation.x = -Math.PI / 2;
+        ground.receiveShadow = true;
+        this.scene.add(ground);
 
-    window.addEventListener("resize", () => this.onWindowResize());
-  }
-
-  onWindowResize() {
-    this.camera.aspect = window.innerWidth / window.innerHeight;
-    this.camera.updateProjectionMatrix();
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
-  }
-
-  createBlock(x, y, z, color, width, height, depth) {
-    const geo = new THREE.BoxGeometry(width, height, depth);
-    const mat = new THREE.MeshStandardMaterial({ color });
-    const mesh = new THREE.Mesh(geo, mat);
-    mesh.position.set(x, y, z);
-    mesh.castShadow = true;
-    return mesh;
-  }
-
-  createMaze(mazeGrid, blockSize = 2, wallHeight = 4, wallColor = 0x333333) {
-    const offsetX = -(mazeGrid[0].length * blockSize) / 2;
-    const offsetZ = -(mazeGrid.length * blockSize) / 2;
-
-    for (let row = 0; row < mazeGrid.length; row++) {
-      for (let col = 0; col < mazeGrid[0].length; col++) {
-        if (mazeGrid[row][col] === 1) {
-          const x = offsetX + col * blockSize;
-          const z = offsetZ + row * blockSize;
-          const block = this.createBlock(
-            x,
-            wallHeight / 2,
-            z,
-            wallColor,
-            blockSize,
-            wallHeight,
-            blockSize
-          );
-          this.scene.add(block);
-          this.walls.push(block);
-        }
-      }
+        window.addEventListener("resize", () => this.onWindowResize());
     }
-  }
 
-  createRadicalGeo(x, y, z, innerRadius, outerRadius, length, color) {
-    const geo = new THREE.CylinderGeometry(innerRadius, outerRadius, length, 16);
-    const mat = new THREE.MeshStandardMaterial({ color });
-    const mesh = new THREE.Mesh(geo, mat);
-    mesh.position.set(x, y, z);
-    mesh.castShadow = true;
-    return mesh;
-  }
 
-  render() {
-    this.renderer.render(this.scene, this.camera);
-  }
+    onWindowResize() {
+        this.camera.aspect =
+            this.container.clientWidth / this.container.clientHeight;
+        this.camera.updateProjectionMatrix();
+        this.renderer.setSize(
+            this.container.clientWidth,
+            this.container.clientHeight
+        );
+    }
+
+    createBlock(x, y, z, color, width, height, depth) {
+        const geo = new THREE.BoxGeometry(width, height, depth);
+        const mat = new THREE.MeshStandardMaterial({ color });
+        const mesh = new THREE.Mesh(geo, mat);
+        mesh.position.set(x, y, z);
+        mesh.castShadow = true;
+        return mesh;
+    }
+
+    createWallBlock(x, y, z, size = 2, height = 4) {
+        const geometry = new THREE.BoxGeometry(size, height, size);
+        const material = new THREE.MeshStandardMaterial({
+            color: 0x444444,  // Real wall color
+            roughness: 0.6,
+            metalness: 0.1
+        });
+
+        const mesh = new THREE.Mesh(geometry, material);
+        mesh.position.set(x, y, z);
+        mesh.castShadow = true;
+
+        const edges = new THREE.EdgesGeometry(geometry);
+        const outline = new THREE.LineSegments(
+            edges,
+            new THREE.LineBasicMaterial({ color: 0x000000 })
+        );
+        mesh.add(outline);
+
+        return mesh;
+    }
+
+
+    render() {
+        this.renderer.render(this.scene, this.camera);
+    }
 }
 
