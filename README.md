@@ -49,6 +49,12 @@
   - Abenezer Dagne 056/16
   - Aschalew Getahun 0193/16
   - Dagmawi Feyissa 0367/16
+---
+Next Steps 
+  - Implement timer-based challenges
+  - Enhance UI overlays
+  - Optimize collision and rendering performance for larger arenas
+
 
 
 
