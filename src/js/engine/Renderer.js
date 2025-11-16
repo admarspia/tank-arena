@@ -55,7 +55,7 @@ export default class Renderer {
 
     createBlock(x, y, z, color, width, height, depth) {
         const geo = new THREE.BoxGeometry(width, height, depth);
-        const mat = new THREE.MeshStandardMaterial({ color });
+        const mat = new THREE.MeshStandardMaterial(color);
         const mesh = new THREE.Mesh(geo, mat);
         mesh.position.set(x, y, z);
         mesh.castShadow = true;
