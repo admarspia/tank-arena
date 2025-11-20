@@ -45,7 +45,6 @@
 👥 Team Members
   - Abrham Aragie 0089/16
   - Ahadu Akalu 0113/16
-  - Amir Yimam 0169/16
   - Abenezer Dagne 056/16
   - Aschalew Getahun 0193/16
   - Dagmawi Feyissa 0367/16
