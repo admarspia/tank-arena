@@ -1,6 +1,5 @@
 # Tank Arena: Maze Challenge
 
-![Game Banner]
 **Tank Arena: Maze Challenge** is a **3D browser-based tank game** built with **HTML, CSS, and JavaScript**, using **Three.js** for rendering. Players control a tank to **navigate shrinking fence arenas**, solve **phrase-based puzzles**, and survive while avoiding collisions with walls.
 
 ---
