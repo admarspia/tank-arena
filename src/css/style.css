@@ -1,13 +1,62 @@
-html, body {
-  margin: 0;
-  padding: 0;
-  background: #222;
-}
-.gamearea {
-  display: grid;
-  align-items: center;
-  
-  background: #333;
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #000;
 }
 
+#start-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    
+    /* Center the text */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+    /* BACKGROUND IMAGE SETTINGS */
+    /* This looks for background.jpg inside the 'public' folder */
+    background-image: url('/background.png'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    /* Fallback color: If image fails, background will be dark gray */
+    background-color: #333; 
+}
+
+.content {
+    text-align: center;
+    color: white;
+    /* This uses the font we loaded in HTML */
+    font-family: 'Press Start 2P', cursive; 
+}
+
+h1 {
+    font-size: 3rem;
+    line-height: 1.5;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+    text-shadow: 4px 4px 0 #000; /* Black shadow for readability */
+}
+
+#play-btn {
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.2rem;
+    padding: 20px 40px;
+    border: 4px solid white;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s;
+}
+
+#play-btn:hover {
+    background: white;
+    color: black;
+    transform: scale(1.05);
+}

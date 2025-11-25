@@ -1,38 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>3D Game</title>
-  <style>
-    body { margin: 0; overflow: hidden; background: #202020; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tank Arena</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="start-screen">
+      <div class="content">
+        <h1>TANK ARENA:<br>MAZE CHALLENGE</h1>
+        <button id="play-btn">PLAY NOW</button>
+      </div>
+    </div>
 
-    #gameArea {
-      width: 100vw;
-      height: 100vh;
-      position: relative;
-    }
-
-    #phraseBox {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      padding: 12px 20px;
-      background: rgba(0,0,0,0.65);
-      color: #fff;
-      font-size: 22px;
-      font-family: sans-serif;
-      border-radius: 6px;
-      z-index: 10;
-    }
-  </style>
-</head>
-
-<body>
-  <div id="gameArea">
-    <div id="phraseBox">Loading...</div> 
-  </div>
-
-  <script type="module" src="/src/main.js"></script>
-</body>
+    <script type="module" src="/src/main.js"></script>
+  </body>
 </html>
-

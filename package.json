@@ -1,5 +1,5 @@
 {
-  "name": "2d-tank-arena",
+  "name": "3d-tank-arena",
   "version": "1.0.0",
   "description": "Playable local version with movement and basic rendering.",
   "main": "index.js",
