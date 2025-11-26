@@ -2,32 +2,30 @@ body {
     margin: 0;
     overflow: hidden;
     background-color: #000;
+    font-family: 'Press Start 2P', cursive;
 }
 
-#start-screen {
+.screen {
     position: absolute;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 100;
-    
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
-
-    background-image: url('/background.png'); 
+    text-align: center;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    
-    background-color: #333; 
+    color: white;
 }
 
-.content {
-    text-align: center;
-    color: white;
-    font-family: 'Press Start 2P', cursive; 
+
+#start-screen {
+    display: flex;
+    background-image: url('/background.png'); 
+    background-color: #333; 
 }
 
 h1 {
@@ -38,13 +36,8 @@ h1 {
     text-shadow: 4px 4px 0 #000;
 }
 
-#play-btn {
 
- position: absolute;   
-    top: 15px;             
-    left: 43.4%;             
-
-    
+button {
     background: rgba(0, 0, 0, 0.6);
     color: white;
     font-family: 'Press Start 2P', cursive;
@@ -54,10 +47,35 @@ h1 {
     cursor: pointer;
     text-transform: uppercase;
     transition: all 0.2s;
+    margin: 10px;
 }
 
-#play-btn:hover {
-    background: white;
+button:hover {
+    background: rgb(3, 110, 3);
     color: black;
     transform: scale(1.05);
+}
+
+#controls-page {
+    display: none; 
+    background-color: #333; 
+    background-image: url('/controls-background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    flex-direction: column;
+}
+
+.controls-buttons {
+    margin: 20px 0;
+}
+
+.shortcuts {
+    margin: 10px 0;
+}
+
+.tip {
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #a0ff90;
 }

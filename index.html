@@ -5,16 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tank Arena</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/src/css/style.css">
   </head>
   <body>
-    <div id="start-screen">
+    <!-- Landing Page -->
+    <div id="start-screen" class="screen">
       <div class="content">
         <h1>TANK ARENA:<br>MAZE CHALLENGE</h1>
+        <p>Survive the maze!</p>
         <button id="play-btn">PLAY NOW</button>
       </div>
     </div>
-    <div id="gameArea" style="width: 100vw; height: 100vh;"></div>
 
+    <!-- Controls / Options Page -->
+    <div id="controls-page" class="screen">
+      <div class="content">
+        <button id="controls-play-btn">PLAY</button>
+        <div class="controls-buttons">
+          <button id="help-btn">HELP</button>
+          <button id="pause-btn">PAUSE</button>
+          <button id="mute-btn">MUTE</button>
+        </div>
+        <div class="shortcuts">
+          <p>Controls:</p>
+          <ul>
+            <li>WASD - Move</li>
+            <li>SPACE - Shoot</li>
+            <li>P - Pause</li>
+          </ul>
+        </div>
+        <p class="tip">Tip: Collect ammo to survive longer!</p>
+      </div>
+    </div>
+
+    <!-- Game Area -->
+    <div id="gameArea"></div>
 
     <script type="module" src="/src/main.js"></script>
   </body>
