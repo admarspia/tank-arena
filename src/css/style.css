@@ -1,13 +1,81 @@
-html, body {
-  margin: 0;
-  padding: 0;
-  background: #222;
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #000;
+    font-family: 'Press Start 2P', cursive;
 }
-.gamearea {
-  display: grid;
-  align-items: center;
-  
-  background: #333;
+
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
 }
 
 
+#start-screen {
+    display: flex;
+    background-image: url('/background.png'); 
+    background-color: #333; 
+}
+
+h1 {
+    font-size: 3rem;
+    line-height: 1.5;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+    text-shadow: 4px 4px 0 #000;
+}
+
+
+button {
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.2rem;
+    padding: 20px 40px;
+    border: 4px solid white;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    margin: 10px;
+}
+
+button:hover {
+    background: rgb(3, 110, 3);
+    color: black;
+    transform: scale(1.05);
+}
+
+#controls-page {
+    display: none; 
+    background-color: #333; 
+    background-image: url('/controls-background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    flex-direction: column;
+}
+
+.controls-buttons {
+    margin: 20px 0;
+}
+
+.shortcuts {
+    margin: 10px 0;
+}
+
+.tip {
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #a0ff90;
+}
