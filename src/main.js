@@ -1,5 +1,5 @@
 import '/src/css/style.css';
-import Game from './js/engine/Game.js'; // Remove the curly braces { }
+import Game from './js/engine/Game.js'; 
 
 const startScreen = document.getElementById('start-screen');
 const playBtn = document.getElementById('play-btn');

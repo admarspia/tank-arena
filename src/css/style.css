@@ -12,26 +12,21 @@ body {
     height: 100vh;
     z-index: 100;
     
-    /* Center the text */
     display: flex;
     justify-content: center;
     align-items: center;
 
-    /* BACKGROUND IMAGE SETTINGS */
-    /* This looks for background.jpg inside the 'public' folder */
     background-image: url('/background.png'); 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     
-    /* Fallback color: If image fails, background will be dark gray */
     background-color: #333; 
 }
 
 .content {
     text-align: center;
     color: white;
-    /* This uses the font we loaded in HTML */
     font-family: 'Press Start 2P', cursive; 
 }
 
@@ -40,10 +35,16 @@ h1 {
     line-height: 1.5;
     margin-bottom: 50px;
     text-transform: uppercase;
-    text-shadow: 4px 4px 0 #000; /* Black shadow for readability */
+    text-shadow: 4px 4px 0 #000;
 }
 
 #play-btn {
+
+ position: absolute;   
+    top: 15px;             
+    left: 43.4%;             
+
+    
     background: rgba(0, 0, 0, 0.6);
     color: white;
     font-family: 'Press Start 2P', cursive;
