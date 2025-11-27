@@ -58,13 +58,16 @@ button:hover {
 
 #controls-page {
     display: none; 
-    background-color: #333; 
-    background-image: url('/controls-background.png');
+    width: 100vw;
+    height: 100vh;
+    background-image: url('controls-background.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     flex-direction: column;
+
 }
+
 
 .controls-buttons {
     margin: 20px 0;
