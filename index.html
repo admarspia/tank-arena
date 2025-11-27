@@ -17,25 +17,52 @@
     </div>
 
     <!-- Controls / Options Page -->
-    <div id="controls-page" class="screen">
-      <div class="content">
-        <button id="controls-play-btn">PLAY</button>
-        <div class="controls-buttons">
-          <button id="help-btn">HELP</button>
-          <button id="pause-btn">PAUSE</button>
-          <button id="mute-btn">MUTE</button>
-        </div>
-        <div class="shortcuts">
-          <p>Controls:</p>
-          <ul>
-            <li>WASD - Move</li>
-            <li>SPACE - Shoot</li>
-            <li>P - Pause</li>
-          </ul>
-        </div>
-        <p class="tip">Tip: Collect ammo to survive longer!</p>
-      </div>
+   <!-- Controls / Menu Page -->
+<div id="controls-page" class="screen" style="display: none;">
+  
+  <!-- Top Right Menu -->
+  <div class="top-menu">
+    <button class="top-btn" id="menu-start">Start</button>
+    <button class="top-btn" id="menu-help">Help</button>
+    <button class="top-btn" id="menu-exit">Exit</button>
+  </div>
+<!-- HELP OVERLAY -->
+<div id="help-overlay">
+  <div class="help-box">
+    <h2>GAME CONTROLS</h2>
+
+    <ul>
+      <li><strong>Arrow Down</strong> Move Forward</li>
+      <li><strong>Arrow Up</strong>  Move Backward</li>
+      <li><strong>Arrow Left</strong> Rotate Left</li>
+      <li><strong>Arrow Right</strong> Rotate Right</li>
+      <li><strong>X</strong> Fire</li>
+      <li><strong>S</strong> Stop Game</li>
+      <li><strong>R</strong> Resume Game</li>
+    </ul>
+
+    <button id="close-help">CLOSE</button>
+  </div>
+</div>
+  <!-- Levels Section -->
+  <div class="levels-container">
+    <div class="level-card">
+      <img src="images/level1.png" alt="Level 1" />
+      <h3>Level 1</h3>
     </div>
+
+    <div class="level-card">
+      <img src="images/level2.png" alt="Level 2" />
+      <h3>Level 2</h3>
+    </div>
+
+    <div class="level-card">
+      <img src="images/level3.png" alt="Level 3" />
+      <h3>Level 3</h3>
+    </div>
+  </div>
+
+</div>
 
     <!-- Game Area -->
     <div id="gameArea"></div>
