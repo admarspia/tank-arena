@@ -8,18 +8,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const playBtn = document.getElementById("play-btn");
 
-    // Top-right menu
+    // Top-right menu buttons
     const btnStart = document.getElementById("menu-start");
     const btnHelp = document.getElementById("menu-help");
     const btnExit = document.getElementById("menu-exit");
 
     // Help overlay
     const helpOverlay = document.getElementById("help-overlay");
-    const closeHelp = document.getElementById("close-help");
+    const closeHelpBtn = document.getElementById("close-help");
 
     // Level cards
     const levelCards = document.querySelectorAll(".level-card");
-
 
     /* ----------------------
        SCREEN NAVIGATION
@@ -45,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
         helpOverlay.style.display = "flex";
     });
 
-    closeHelp.addEventListener("click", () => {
+    closeHelpBtn.addEventListener("click", () => {
         helpOverlay.style.display = "none";
     });
 
@@ -57,10 +56,16 @@ document.addEventListener("DOMContentLoaded", () => {
         controlsPage.style.display = "none";
         gameArea.style.display = "block";
 
-        // 👉 This is where you actually start your game engine
+        // Set full window size
+        gameArea.style.width = window.innerWidth + "px";
+        gameArea.style.height = window.innerHeight + "px";
+
+        // Create and start the game
+        const game = new Game(gameArea);  // Pass the container div to your Game engine
+        game.start();                       // Start the game logic
+
         console.log("Game Started!");
     });
-
 
     /* ----------------------
        LEVEL CARDS
@@ -69,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
     levelCards.forEach((card, index) => {
         card.addEventListener("click", () => {
             alert(`You selected Level ${index + 1}!`);
-            console.log("Load map here!");
+            console.log("Load map for Level", index + 1);
         });
     });
 
