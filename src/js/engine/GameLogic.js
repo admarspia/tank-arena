@@ -1,41 +1,68 @@
 export default class GameLogic {
     constructor() {
+
         this.phrases = [
-            "Sky Above Mountain",
-            "Red Fire Dragon",
-            "Bright Silent Valley",
-            "Frozen Night Wind",
-            "Golden Shadow Path",
-            "Morning River Light",
-            "Hidden Silent Forest",
-            "Crystal Stone Tower"
+            "Left wind beneath the mountain",
+            "Right river above the hill",
+            "Top eagle watching the east",
+            "Bottom shadow falling to the west",
+            "Left moon rising above the valley",
+            "Right stone hidden under the sand",
+            "Top fire spreading east",
+            "Bottom wolf sleeping beneath the trees"
         ];
 
         this.currentPhrase = "";
-        this.currentValue = 0;
     }
 
     pickPhrase() {
-        this.currentPhrase = this.phrases[Math.floor(Math.random() * this.phrases.length)];
+        this.currentPhrase =
+            this.phrases[Math.floor(Math.random() * this.phrases.length)];
         return this.currentPhrase;
     }
 
-    generateNumber(phrase, len) {
-        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        let sum = 0;
+    randomRange(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
 
-        const firstLetters = phrase
-            .split(" ")
-            .map(w => w[0].toUpperCase());
+    decodePhrase(phrase, numberOfWalls) {
+        phrase = phrase.toLowerCase();
 
-        firstLetters.forEach(l => {
-            const idx = letters.indexOf(l);
-            if (idx !== -1 ) sum += (idx + 1);
-        });
+        const wallWidth = numberOfWalls / 4;  
+        let baseIndex = 0;                    
+        if (phrase.includes("top")) baseIndex = 0;
+        else if (phrase.includes("left")) baseIndex = wallWidth;
+        else if (phrase.includes("bottom") || phrase.includes("down")) baseIndex = wallWidth * 2;
+        else if (phrase.includes("right")) baseIndex = wallWidth * 3;
 
+        let half = "upper";
 
-        this.currentValue = sum % len;
-        return this.currentValue;
+        if (phrase.includes("beneath") || phrase.includes("under") || phrase.includes("lower"))
+            half = "lower";
+        if (phrase.includes("west"))
+            half = "lower";
+        if (phrase.includes("east"))
+            half = "upper";
+
+        const upperStart = baseIndex;
+        const upperEnd = baseIndex + Math.floor(wallWidth / 2) - 1;
+
+        const lowerStart = baseIndex + Math.floor(wallWidth / 2);
+        const lowerEnd = baseIndex + wallWidth - 1;
+
+        let target;
+
+        if (half === "upper") {
+            target = this.randomRange(upperStart, upperEnd);
+        } else {
+            target = this.randomRange(lowerStart, lowerEnd);
+        }
+
+        return target;
+    }
+
+    getIndex(numberOfWalls) {
+        return this.decodePhrase(this.currentPhrase, numberOfWalls);
     }
 }
 

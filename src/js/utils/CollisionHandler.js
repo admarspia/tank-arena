@@ -1,7 +1,8 @@
 import * as THREE from "three";
 
 export default class CollisionHandler {
-    constructor(fence, walls, bullets, playerTank, hiddenWallIndex) {
+    constructor(game, fence, walls, bullets, playerTank, hiddenWallIndex) {
+        this.game = game;
         this.fence = fence;
         this.walls = walls;
         this.bullets = bullets;
@@ -51,6 +52,8 @@ export default class CollisionHandler {
                         this.fence.openFance(i, 3);
                         this.fence.isActive = false;
                         this.fence.destroyed = true;
+                        clearTimeout(this.game.shrinkTimeout);
+
                     }
                 }
             }

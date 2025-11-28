@@ -62,13 +62,10 @@ export default class Renderer {
         return mesh;
     }
 
-    createWallBlock(x, y, z, size = 2, height = 4) {
+    
+    createWallBlock(x, y, z, size = 2, height = 4,color ) {
         const geometry = new THREE.BoxGeometry(size, height, size);
-        const material = new THREE.MeshStandardMaterial({
-            color: 0x444444,  // Real wall color
-            roughness: 0.6,
-            metalness: 0.1
-        });
+        const material = new THREE.MeshStandardMaterial(color);
 
         const mesh = new THREE.Mesh(geometry, material);
         mesh.position.set(x, y, z);

@@ -2,6 +2,20 @@ import './css/style.css';
 import Game from './js/engine/Game.js';
 
 document.addEventListener("DOMContentLoaded", () => {
+    const tankColors = [
+        { color: 0x556B2F, roughness: 0.7, metalness: 0.2 },
+        { color: 0x6B8E23, roughness: 0.65, metalness: 0.25 }, 
+        { color: 0x8FBC8F, roughness: 0.6, metalness: 0.3 }
+    ];
+
+    const fenceColors = [
+        { color: 0x444444, roughness: 0.6, metalness: 0.1 }, 
+        { color: 0x696686, roughness: 0.55, metalness: 0.15 },
+        { color: 0x889988, roughness: 0.5, metalness: 0.2 }    
+    ];
+
+
+
     const startScreen = document.getElementById("start-screen");
     const controlsPage = document.getElementById("controls-page");
     const gameArea = document.getElementById("gameArea");
@@ -58,8 +72,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     levelCards.forEach((card, index) => {
         card.addEventListener("click", () => {
-            alert(`You selected Level ${index + 1}!`);
+            controlsPage.style.display = "none";
+            gameArea.style.display = "block";
+
+
+            gameArea.style.width = window.innerWidth + "px";
+            gameArea.style.height = window.innerHeight + "px";
+
+
             console.log("Load map for Level", index + 1);
+            const game = new Game(4 + index, 15 / (index + 1), 50 / (index + 1), tankColors[index], fenceColors[index]);  
+            game.start();                        
+            console.log("Game Started!");
+
         });
     });
 

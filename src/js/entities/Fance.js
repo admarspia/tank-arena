@@ -1,8 +1,13 @@
 import Wall from "./Wall.js";
 
 export default class Fance {
-    constructor(renderer, fanceLevel, width, length, blocksize = 2) {
+    constructor(renderer, fanceLevel, width, length, blocksize = 2, color = {
+            color: 0x444444,  
+            roughness: 0.6,
+            metalness: 0.1
+        }) {
         this.renderer = renderer;
+        this.color = color;
         this.fanceLevel = fanceLevel;
         this.width = width;    
         this.length = length; 
@@ -22,7 +27,8 @@ export default class Fance {
             height / 2,
             z,
             this.blocksize,
-            height
+            height,
+            this.color
         );
         this.walls.push(new Wall(mesh));
         this.renderer.scene.add(mesh);
