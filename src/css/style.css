@@ -69,7 +69,6 @@ button:hover {
 }
 
 
-/* Top Right Menu */
 .top-menu {
     position: absolute;
     top: 20px;
@@ -93,7 +92,6 @@ button:hover {
     color: black;
 }
 
-/* Level Cards Horizontal */
 .levels-container {
     display: flex;
     gap: 40px;
