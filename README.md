@@ -1,5 +1,14 @@
 # Tank Arena: Maze Challenge
+Tank Arena is a simple tank battle project designed for learning and collaboration.
+## Features
+- Tank movement system
+- Expandable arena environment
+- Modular structure for adding enemies, obstacles, and power-ups
 
+## How to Run
+```bash
+g++ *.cpp -o tank-arena
+./tank-arena
 **Tank Arena: Maze Challenge** is a **3D browser-based tank game** built with **HTML, CSS, and JavaScript**, using **Three.js** for rendering. Players control a tank to **navigate shrinking fence arenas**, solve **phrase-based puzzles**, and survive while avoiding collisions with walls.
 
 ---
