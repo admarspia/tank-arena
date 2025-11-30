@@ -38,5 +38,21 @@ export default class Bullet {
             this.mesh.parent.remove(this.mesh);
         }
     }
+    checkCollision(objects) {
+    for (const obj of objects) {
+        const distance = this.position.distanceTo(obj.mesh.position);
+
+        if (distance < this.size + obj.width / 2) {
+            if (obj instanceof TankBody && obj !== this.owner) {
+                obj.takeDamage(10);
+                this.owner.addScore(1);
+            } else {
+                obj.takeDamage?.(10);
+            }
+            this.destroy();
+        }
+    }
 }
+}
+
 
