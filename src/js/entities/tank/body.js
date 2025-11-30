@@ -72,5 +72,10 @@ export default class TankBody {
         this._rot.setFromAxisAngle(new Vector3(0, 1, 0), -delta * 0.8);
         this.mesh.quaternion.multiply(this._rot);
     }
+    respawn(x, z) {
+    this.mesh.position.set(x, this.height / 2, z);
+    this.hitted = 0;
+    this.score = 0;
+}
 }
 
