@@ -1,0 +1,18 @@
+<button id="mute-btn" class="mute-button">🔊</button>
+
+<style>
+  .mute-button {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    padding: 10px 15px;
+    font-size: 20px;
+    border: none;
+    border-radius: 8px;
+    background: #222;
+    color: white;
+    cursor: pointer;
+    z-index: 9999;
+  }
+</style>
+
