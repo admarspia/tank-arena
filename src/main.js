@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const startScreen = document.getElementById("start-screen");
     const controlsPage = document.getElementById("controls-page");
     const gameArea = document.getElementById("gameArea");
+    const gameOverScreen = document.getElementById("game-over-screen");
 
     const playBtn = document.getElementById("play-btn");
 
@@ -30,6 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const closeHelpBtn = document.getElementById("close-help");
 
     const levelCards = document.querySelectorAll(".level-card");
+     const restartBtn = document.getElementById("restart-btn");
+    const exitBtn = document.getElementById("exit-btn");
 
 
     playBtn.addEventListener("click", () => {
@@ -64,6 +67,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         
         const game = new Game(gameArea);  
+         game.onGameOver = showGameOver;
+
         game.start();                       
 
         console.log("Game Started!");
@@ -81,7 +86,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
             console.log("Load map for Level", index + 1);
-            const game = new Game(4 + index, 15 / (index + 1), 50 / (index + 1), tankColors[index], fenceColors[index]);  
+            const game = new Game(4 + index, 15 / (index + 1), 50 / (index + 1), tankColors[index], fenceColors[index]);
+             
+            game.onGameOver = showGameOver;
             game.start();                        
             console.log("Game Started!");
 
