@@ -1,3 +1,6 @@
+//intialization
+const shootSound = new Audio("audio%20file/mixkit-arcade-game-explosion-2759.wav");
+shootSound.volume = 0.4;
 
 export default class Input {
     constructor() {
@@ -17,7 +20,13 @@ export default class Input {
         if (this.isDown("ArrowUp")) tank.moveBackward(delta);
         if (this.isDown("ArrowLeft")) tank.rotateLeft(delta);
         if (this.isDown("ArrowRight")) tank.rotateRight(delta);
-        if (this.isDown("x")) tank.fire(renderer.scene);
+// Inside key check
+        if (this.isDown("x")) {
+          shootSound.currentTime = 0; // rewind to play instantly
+          shootSound.play();
+          tank.fire(renderer.scene);
+         }
+
         if (this.isDown("s")) game.stop();
         if (this.isDown("r")) game.resume();
 
