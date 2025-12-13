@@ -7,6 +7,11 @@ import CollisionHandler from "../utils/CollisionHandler.js";
 import GameLogic from "./GameLogic.js";
 
 export default class Game {
+    // store level number
+    constructor(levels = 1, ...rest) {
+    this.levels = levels;
+}
+
     constructor(levels, gameDuration, shrinkSpeed, tankColor, fenceColor ) {
 
         this.renderer = new Renderer();
@@ -106,6 +111,22 @@ export default class Game {
 
     endGame(message) {
         this.stop();
+        // auto switch
+        if (window.bgTracks) {
+
+        Object.values(window.bgTracks).forEach(track => {
+            track.pause();
+            track.currentTime = 0;
+        });
+
+        if (this.levels === 1) {
+            window.bgTracks.level2.play();
+        } 
+        else if (this.levels === 2) {
+            window.bgTracks.level3.play();
+        }
+    }
+
         this.messageBox.textContent = message;
         this.messageBox.style.display = "block";
     }
