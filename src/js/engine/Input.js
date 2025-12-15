@@ -8,8 +8,8 @@ export default class Input {
        //previous state
         movement state
         this.isMoving = false;
-        this.engineSound = new Audio("audio/engine.mp3");
-        this.brakeSound = new Audio("audio/brake.mp3");
+        this.engineSound = new Audio("audio1/mixkit-tank-engine-working-2753.wav");
+        this.brakeSound = new Audio("audio%20file/parking-brake-107976.mp3");
     //audio sound
         this.engineSound.loop = true;   // Engine keeps running while moving
         this.engineSound.volume = 0.6;  // Adjust as needed
