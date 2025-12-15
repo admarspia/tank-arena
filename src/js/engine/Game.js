@@ -70,6 +70,20 @@ export default class Game {
         });
         this.container.appendChild(this.phraseBox);
     }
+    //bg changing
+playBackground(level) {
+  if (!window.bgTracks) return;
+
+  Object.values(window.bgTracks).forEach(t => {
+    t.pause();
+    t.currentTime = 0;
+  });
+
+  if (window.bgTracks[level]) {
+    window.bgTracks[level].play();
+  }
+}
+
     start() {
         this.createFences();
         this.createPlayer();
@@ -78,6 +92,8 @@ export default class Game {
 
         this.activeFence.isActive = true;
         this.isRunning = true;
+        //background start
+        this.playBackgroundMusic(1);
 
         this.timer = setTimeout(() => this.endGame("Time's up! You lose!"), this.gameDuration);
 
@@ -119,13 +135,7 @@ export default class Game {
             track.currentTime = 0;
         });
 
-        if (this.levels === 1) {
-            window.bgTracks.level2.play();
-        } 
-        else if (this.levels === 2) {
-            window.bgTracks.level3.play();
-        }
-    }
+        //deleted switch
 
         this.messageBox.textContent = message;
         this.messageBox.style.display = "block";
@@ -223,6 +233,9 @@ export default class Game {
             this.activeFence = this.activeFence.nextLevel;
             this.activeFence.isActive = true;
             this.collisionHandler.setFence(this.activeFence);
+           //switch bg
+            const currentLevel = this.fences.indexOf(this.activeFence) + 1;
+            this.playBackgroundMusic(currentLevel);
 
             this.generateNewPuzzle();
             this.shrinkFenceRecursively();
