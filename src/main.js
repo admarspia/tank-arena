@@ -18,6 +18,31 @@ window.bgTracks.level1.play().catch(() => {});
 document.addEventListener("click", () => {
     Object.values(window.bgTracks).forEach(track => track.muted = false);
 }, { once: true });
+//dropdown button
+const toggleBtn = document.getElementById("music-toggle");
+const dropdown = document.getElementById("music-dropdown");
+
+toggleBtn.onclick = () => {
+  dropdown.style.display =
+    dropdown.style.display === "block" ? "none" : "block";
+};
+
+dropdown.querySelectorAll("button").forEach(btn => {
+  btn.onclick = () => {
+    const track = btn.dataset.track;
+
+    Object.values(window.bgTracks).forEach(t => {
+      t.pause();
+      t.currentTime = 0;
+    });
+
+    if (track !== "mute") {
+      window.bgTracks[track].play();
+    }
+
+    dropdown.style.display = "none";
+  };
+});
 
 document.addEventListener("DOMContentLoaded", () => {
     const tankColors = [
