@@ -117,4 +117,22 @@ playBackground(level) {
         this.engineSound.volume = 0.6;  // Adjust as needed
         this.brakeSound.volume = 0.8;   // Brake sound louder
 
-       
+       //instantiation 
+        const movingNow =
+            this.isDown("ArrowDown") ||
+            this.isDown("ArrowUp") ||
+            this.isDown("ArrowLeft") ||
+            this.isDown("ArrowRight");
+        //movement sound
+        if (movingNow && !this.isMoving) {
+            this.engineSound.play();
+        }
+       //brake sound
+        WHEN movement stops
+        if (!movingNow && this.isMoving) {
+            this.engineSound.pause();
+            this.engineSound.currentTime = 0;
+            this.brakeSound.play();
+        }
+
+        this.isMoving = movingNow;
