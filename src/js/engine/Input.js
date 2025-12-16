@@ -16,25 +16,7 @@ export default class Input {
 
 
     handleUserInputs(delta, tank, renderer, game) {
-        //instantiation 
-        const movingNow =
-            this.isDown("ArrowDown") ||
-            this.isDown("ArrowUp") ||
-            this.isDown("ArrowLeft") ||
-            this.isDown("ArrowRight");
-        //movement sound
-        if (movingNow && !this.isMoving) {
-            this.engineSound.play();
-        }
-       //brake sound
-        WHEN movement stops
-        if (!movingNow && this.isMoving) {
-            this.engineSound.pause();
-            this.engineSound.currentTime = 0;
-            this.brakeSound.play();
-        }
-
-        this.isMoving = movingNow;
+        
         if (this.isDown("ArrowDown")) tank.moveForward(delta);
         if (this.isDown("ArrowUp")) tank.moveBackward(delta);
         if (this.isDown("ArrowLeft")) tank.rotateLeft(delta);
