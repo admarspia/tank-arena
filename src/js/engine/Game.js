@@ -70,19 +70,6 @@ export default class Game {
         });
         this.container.appendChild(this.phraseBox);
     }
-    //bg changing
-playBackground(level) {
-  if (!window.bgTracks) return;
-
-  Object.values(window.bgTracks).forEach(t => {
-    t.pause();
-    t.currentTime = 0;
-  });
-
-  if (window.bgTracks[level]) {
-    window.bgTracks[level].play();
-  }
-}
 
     start() {
         this.createFences();
