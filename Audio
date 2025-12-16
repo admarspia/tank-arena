@@ -171,3 +171,6 @@ window.bgTracks.level1.play().catch(() => {});
 document.addEventListener("click", () => {
     Object.values(window.bgTracks).forEach(track => track.muted = false);
 }, { once: true });
+
+//background start
+        this.playBackgroundMusic(1);
