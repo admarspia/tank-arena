@@ -75,9 +75,7 @@ export default class Game {
 
         this.activeFence.isActive = true;
         this.isRunning = true;
-        //background start
-        this.playBackgroundMusic(1);
-
+        
         this.timer = setTimeout(() => this.endGame("Time's up! You lose!"), this.gameDuration);
 
         this.shrinkFenceRecursively();
