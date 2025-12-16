@@ -7,11 +7,7 @@ import CollisionHandler from "../utils/CollisionHandler.js";
 import GameLogic from "./GameLogic.js";
 
 export default class Game {
-    // store level number
-    constructor(levels = 1, ...rest) {
-    this.levels = levels;
-}
-
+    
     constructor(levels, gameDuration, shrinkSpeed, tankColor, fenceColor ) {
 
         this.renderer = new Renderer();
