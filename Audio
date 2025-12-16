@@ -28,3 +28,36 @@
     <button data-track="3">BG – Level 3</button>
   </div>
 </div>
+  gh#music-control {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 9999;
+  font-family: Arial, sans-serif;
+}
+
+#music-toggle {
+  margin-left: 5px;
+}
+
+#music-dropdown {
+  display: none;
+  background: rgba(0,0,0,0.85);
+  padding: 5px;
+  border-radius: 6px;
+}
+
+#music-dropdown button {
+  display: block;
+  width: 100%;
+  color: white;
+  background: none;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+}
+
+#music-dropdown button:hover {
+  background: rgba(255,255,255,0.2);
+}
+
