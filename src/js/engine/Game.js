@@ -123,6 +123,13 @@ export default class Game {
         });
 
         //deleted switch
+       if (this.levels === 1) {
+            window.bgTracks.level2.play();
+        } 
+        else if (this.levels === 2) {
+            window.bgTracks.level3.play();
+        }
+    }
 
         this.messageBox.textContent = message;
         this.messageBox.style.display = "block";
