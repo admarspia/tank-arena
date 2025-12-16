@@ -85,3 +85,17 @@ dropdown.querySelectorAll("button").forEach(btn => {
     dropdown.style.display = "none";
   };
 });
+    //bg changing
+
+playBackground(level) {
+  if (!window.bgTracks) return;
+
+  Object.values(window.bgTracks).forEach(t => {
+    t.pause();
+    t.currentTime = 0;
+  });
+
+  if (window.bgTracks[level]) {
+    window.bgTracks[level].play();
+  }
+}
