@@ -1,0 +1,176 @@
+<button id="mute-btn" class="mute-button">🔊</button>
+
+<style>
+  .mute-button {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    padding: 10px 15px;
+    font-size: 20px;
+    border: none;
+    border-radius: 8px;
+    background: #222;
+    color: white;
+    cursor: pointer;
+    z-index: 9999;
+  }
+</style>
+
+<!--mute and bg choosing button-->
+   <div id="music-control">
+  <span id="music-label">🎵 Background</span>
+  <button id="music-toggle">▼</button>
+
+  <div id="music-dropdown">
+    <button data-track="mute">🔇 Mute</button>
+    <button data-track="1">BG – Level 1</button>
+    <button data-track="2">BG – Level 2</button>
+    <button data-track="3">BG – Level 3</button>
+  </div>
+</div>
+  gh#music-control {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 9999;
+  font-family: Arial, sans-serif;
+}
+
+
+#music-toggle {
+  margin-left: 5px;
+}
+
+#music-dropdown {
+  display: none;
+  background: rgba(0,0,0,0.85);
+  padding: 5px;
+  border-radius: 6px;
+}
+
+#music-dropdown button {
+  display: block;
+  width: 100%;
+  color: white;
+  background: none;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+}
+
+#music-dropdown button:hover {
+  background: rgba(255,255,255,0.2);
+}
+//dropdown button
+const toggleBtn = document.getElementById("music-toggle");
+const dropdown = document.getElementById("music-dropdown");
+
+toggleBtn.onclick = () => {
+  dropdown.style.display =
+    dropdown.style.display === "block" ? "none" : "block";
+};
+
+dropdown.querySelectorAll("button").forEach(btn => {
+  btn.onclick = () => {
+    const track = btn.dataset.track;
+
+    Object.values(window.bgTracks).forEach(t => {
+      t.pause();
+      t.currentTime = 0;
+    });
+
+    if (track !== "mute") {
+      window.bgTracks[track].play();
+    }
+
+    dropdown.style.display = "none";
+  };
+});
+    //bg changing
+
+playBackground(level) {
+  if (!window.bgTracks) return;
+
+  Object.values(window.bgTracks).forEach(t => {
+    t.pause();
+    t.currentTime = 0;
+  });
+
+  if (window.bgTracks[level]) {
+    window.bgTracks[level].play();
+  }
+}
+//switch bg
+            const currentLevel = this.fences.indexOf(this.activeFence) + 1;
+            this.playBackgroundMusic(currentLevel);
+// store level number
+    constructor(levels = 1, ...rest) {
+    this.levels = levels;
+}
+
+       //previous state
+        movement state
+        this.isMoving = false;
+        this.engineSound = new Audio("audio1/mixkit-tank-engine-working-2753.wav");
+        this.brakeSound = new Audio("audio%20file/parking-brake-107976.mp3");
+    //audio sound
+        this.engineSound.loop = true;   // Engine keeps running while moving
+        this.engineSound.volume = 0.6;  // Adjust as needed
+        this.brakeSound.volume = 0.8;   // Brake sound louder
+
+       //instantiation 
+        const movingNow =
+            this.isDown("ArrowDown") ||
+            this.isDown("ArrowUp") ||
+            this.isDown("ArrowLeft") ||
+            this.isDown("ArrowRight");
+        //movement sound
+        if (movingNow && !this.isMoving) {
+            this.engineSound.play();
+        }
+       //brake sound
+        WHEN movement stops
+        if (!movingNow && this.isMoving) {
+            this.engineSound.pause();
+            this.engineSound.currentTime = 0;
+            this.brakeSound.play();
+        }
+
+        this.isMoving = movingNow;
+// auto switch
+        if (window.bgTracks) {
+
+        Object.values(window.bgTracks).forEach(track => {
+            track.pause();
+            track.currentTime = 0;
+        });
+
+        //deleted switch
+       if (this.levels === 1) {
+            window.bgTracks.level2.play();
+        } 
+        else if (this.levels === 2) {
+            window.bgTracks.level3.play();
+        }
+    }
+//instantiate 
+window.bgTracks = {
+    level1: new Audio("audio1/Wellerman_Nathan_Evans.mp3"),
+    level2: new Audio("audio%20file/Shingeki no Kyojin 2 Opening - Shinzou wo Sasageyo_default.mp3"),
+    level3: new Audio("audio%20file/final-boss-music.mp3")
+};
+
+Object.values(window.bgTracks).forEach(track => {
+    track.loop = true;
+    track.volume = 0.5;
+    track.muted = true;
+});
+//start when page loaded(muted)
+window.bgTracks.level1.play().catch(() => {});
+//unmute on first interaction
+document.addEventListener("click", () => {
+    Object.values(window.bgTracks).forEach(track => track.muted = false);
+}, { once: true });
+
+//background start
+        this.playBackgroundMusic(1);

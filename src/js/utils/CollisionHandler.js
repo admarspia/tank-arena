@@ -1,3 +1,7 @@
+//initialization
+const breakSound = new Audio("audio%20file/mixkit-explosive-impact-from-afar-2758.wav");
+const notBreakSound = new Audio("audio%20file/mixkit-empty-tube-hit-3197.wav");
+
 import * as THREE from "three";
 
 export default class CollisionHandler {
@@ -49,11 +53,20 @@ export default class CollisionHandler {
                 if (bulletBox.intersectsBox(wallBox)) {
                     bullet.destroy();
                     if (i === this.hiddenWallIndex) {
+                        //sound playing
+                        breakSound.currentTime = 0;
+                        breakSound.play();
+                        
                         this.fence.openFance(i, 3);
                         this.fence.isActive = false;
                         this.fence.destroyed = true;
                         clearTimeout(this.game.shrinkTimeout);
 
+                    }
+                    //not break sound
+                   else {
+                      notBreakSound.currentTime = 0;
+                      notBreakSound.play();
                     }
                 }
             }

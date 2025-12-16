@@ -7,6 +7,7 @@ import CollisionHandler from "../utils/CollisionHandler.js";
 import GameLogic from "./GameLogic.js";
 
 export default class Game {
+    
     constructor(levels, gameDuration, shrinkSpeed, tankColor, fenceColor ) {
 
         this.renderer = new Renderer();
@@ -65,6 +66,7 @@ export default class Game {
         });
         this.container.appendChild(this.phraseBox);
     }
+
     start() {
         this.createFences();
         this.createPlayer();
@@ -73,7 +75,7 @@ export default class Game {
 
         this.activeFence.isActive = true;
         this.isRunning = true;
-
+        
         this.timer = setTimeout(() => this.endGame("Time's up! You lose!"), this.gameDuration);
 
         this.shrinkFenceRecursively();
@@ -106,6 +108,7 @@ export default class Game {
 
     endGame(message) {
         this.stop();
+        
         this.messageBox.textContent = message;
         this.messageBox.style.display = "block";
     }
@@ -202,7 +205,7 @@ export default class Game {
             this.activeFence = this.activeFence.nextLevel;
             this.activeFence.isActive = true;
             this.collisionHandler.setFence(this.activeFence);
-
+           
             this.generateNewPuzzle();
             this.shrinkFenceRecursively();
         }
