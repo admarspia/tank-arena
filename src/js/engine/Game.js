@@ -220,10 +220,7 @@ export default class Game {
             this.activeFence = this.activeFence.nextLevel;
             this.activeFence.isActive = true;
             this.collisionHandler.setFence(this.activeFence);
-           //switch bg
-            const currentLevel = this.fences.indexOf(this.activeFence) + 1;
-            this.playBackgroundMusic(currentLevel);
-
+           
             this.generateNewPuzzle();
             this.shrinkFenceRecursively();
         }
