@@ -5,15 +5,6 @@ shootSound.volume = 0.4;
 export default class Input {
     constructor() {
         this.keys = new Set();
-       //previous state
-        movement state
-        this.isMoving = false;
-        this.engineSound = new Audio("audio1/mixkit-tank-engine-working-2753.wav");
-        this.brakeSound = new Audio("audio%20file/parking-brake-107976.mp3");
-    //audio sound
-        this.engineSound.loop = true;   // Engine keeps running while moving
-        this.engineSound.volume = 0.6;  // Adjust as needed
-        this.brakeSound.volume = 0.8;   // Brake sound louder
 
         window.addEventListener("keydown", e => this.keys.add(e.key));
         window.addEventListener("keyup", e => this.keys.delete(e.key));
