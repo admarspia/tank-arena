@@ -1,23 +1,5 @@
 import './css/style.css';
-import Game from './js/engine/Game.js';
-//instantiate 
-window.bgTracks = {
-    level1: new Audio("audio1/Wellerman_Nathan_Evans.mp3"),
-    level2: new Audio("audio%20file/Shingeki no Kyojin 2 Opening - Shinzou wo Sasageyo_default.mp3"),
-    level3: new Audio("audio%20file/final-boss-music.mp3")
-};
-
-Object.values(window.bgTracks).forEach(track => {
-    track.loop = true;
-    track.volume = 0.5;
-    track.muted = true;
-});
-//start when page loaded(muted)
-window.bgTracks.level1.play().catch(() => {});
-//unmute on first interaction
-document.addEventListener("click", () => {
-    Object.values(window.bgTracks).forEach(track => track.muted = false);
-}, { once: true });
+import Game from './js/engine/Game.js';e });
 
 document.addEventListener("DOMContentLoaded", () => {
     const tankColors = [
