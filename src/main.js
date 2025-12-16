@@ -1,5 +1,5 @@
 import './css/style.css';
-import Game from './js/engine/Game.js';e });
+import Game from './js/engine/Game.js';
 
 document.addEventListener("DOMContentLoaded", () => {
     const tankColors = [
