@@ -99,3 +99,7 @@ playBackground(level) {
     window.bgTracks[level].play();
   }
 }
+//switch bg
+            const currentLevel = this.fences.indexOf(this.activeFence) + 1;
+            this.playBackgroundMusic(currentLevel);
+
