@@ -170,4 +170,4 @@ window.bgTracks.level1.play().catch(() => {});
 //unmute on first interaction
 document.addEventListener("click", () => {
     Object.values(window.bgTracks).forEach(track => track.muted = false);
-}, { once: tru
+}, { once: true });
