@@ -102,4 +102,9 @@ playBackground(level) {
 //switch bg
             const currentLevel = this.fences.indexOf(this.activeFence) + 1;
             this.playBackgroundMusic(currentLevel);
+// store level number
+    constructor(levels = 1, ...rest) {
+    this.levels = levels;
+}
+
 
