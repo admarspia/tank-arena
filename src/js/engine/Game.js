@@ -110,23 +110,7 @@ export default class Game {
 
     endGame(message) {
         this.stop();
-        // auto switch
-        if (window.bgTracks) {
-
-        Object.values(window.bgTracks).forEach(track => {
-            track.pause();
-            track.currentTime = 0;
-        });
-
-        //deleted switch
-       if (this.levels === 1) {
-            window.bgTracks.level2.play();
-        } 
-        else if (this.levels === 2) {
-            window.bgTracks.level3.play();
-        }
-    }
-
+        
         this.messageBox.textContent = message;
         this.messageBox.style.display = "block";
     }
